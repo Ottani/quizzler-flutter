@@ -52,9 +52,7 @@ class _QuizPageState extends State<QuizPage> {
     bool isCorrect = quizzEngine.checkAnswer(answer);
     setState(() {
       scoreKeeper.add(isCorrect ? right : wrong);
-      if (quizzEngine.hasNextQuestion()) {
-        currQuestion = quizzEngine.getNextQuestion();
-      } else {
+      if (!quizzEngine.hasNextQuestion()) {
         int score = quizzEngine.getScore();
         Alert(
           context: context,
@@ -80,6 +78,7 @@ class _QuizPageState extends State<QuizPage> {
         quizzEngine.reset();
         scoreKeeper.clear();
       }
+      currQuestion = quizzEngine.getNextQuestion();
     });
   }
 
